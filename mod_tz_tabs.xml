@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="2.5" client="site" method="upgrade">
+    <name>Tz Tabs</name>
+    <author>ThemeZart</author>
+    <creationDate>10 Jun 2014</creationDate>
+    <authorEmail>support@themezart.com</authorEmail>
+    <authorUrl>http://www.themezart.com</authorUrl>
+    <copyright>(C) 2008 - 2011 ThemeZart, LLC. All rights reserved.</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only</license>
+    <version>1.0.0</version>
+    <description>Tz Tabs Module By ThemezArt for Joomla. Create Module with your Modules or Joomla Articles</description>
+    <files>
+        <filename module="mod_tz_tabs">mod_tz_tabs.php</filename>
+        <filename>helper.php</filename>
+        <filename>index.html</filename>
+		
+        <folder>admin</folder>
+        <folder>assets</folder>
+        <folder>language</folder>
+        <folder>tmpl</folder>
+    </files>
+
+    <languages>
+        <language tag="en-GB">language/en-GB.mod_tz_tabs.ini</language>
+    </languages>
+
+    <config>
+        <fields name="params" addfieldpath="modules/mod_tz_tabs/admin/fields">
+            <fieldset name="CONTENT_SOURCE_SETTINGS">
+                <field name="content_source" type="list" default="joomla" label="MOD_TZ_TABS_FIELD_CONTENT_SOURCE_LABEL" description="MOD_TZ_TABS_FIELD_CONTENT_SOURCE_DESC">
+                    <option value="joomla">Joomla Contents</option>
+                    <option value="mods">Modules</option>
+                </field>
+			</fieldset>	
+			<fieldset name="JOOMLA_CONTENT_SETTINGS">
+				<field name="catid" class="chzn-select" type="category" extension="com_content" multiple="true" size="10" default="" label="JCATEGORY" description="Select Category" >
+					<option value="">JOPTION_ALL_CATEGORIES</option>
+				</field>
+
+				<field name="ordering" type="list" default="published" label="Ordering" description="">
+					<option value="c_dsc">Recently Added First</option>
+					<option value="m_dsc">Recently Modified First</option>
+					<option value="p_dsc">Recently Published First</option>
+					<option value="mc_dsc">Recently Touched First</option>
+				</field>
+
+				<field name="user_id" type="list" default="0" label="Authors" description="">
+					<option value="0">Anyone</option>
+					<option value="by_me">Added or modified by me</option>
+					<option value="not_me">Not added or modified by me</option>
+				</field>
+
+				<field name="show_featured" type="list" default="" label="Featured Articles" description="">
+					<option value="">JSHOW</option>
+					<option value="0">JHIDE</option>
+					<option value="1">JFEATURED</option>
+				</field>
+			</fieldset>
+
+			<fieldset name="MODULE_SETTINGS" class="modules_option">
+				<field name="modules" class="chzn-select" type="sql" default="0" multiple="true" size="10" label="MOD_TZ_TABS_FIELD_MODULES_LABEL" description="MOD_TZ_TABS_FIELD_MODULES_DESC" query="SELECT id, module, title FROM #__modules WHERE  `client_id`=0 AND ( `published` !=-2 AND `published` !=0 ) ORDER BY position ASC" key_field="id" value_field="title" />
+			</fieldset>
+
+			<fieldset name="TAB_SETTINGS">
+
+				<field name="count" type="text" default="5" label="MOD_TZ_TABS_FIELD_COUNT_LABEL" description="MOD_TZ_TABS_FIELD_COUNT_DESC" />
+
+				<field name="tabs_position" type="list" default="top" label="MOD_TZ_TABS_FIELD_TABS_POSITION_LABEL" description="MOD_TZ_TABS_FIELD_TABS_POSITION_DESC">
+					<option value="top">Top</option>
+					<option value="bottom">Bottom</option>
+				</field>
+
+				<field name="tabs_interaction" type="list" default="click" label="MOD_TZ_TABS_FIELD_TABS_INTERACTION_LABEL" description="MOD_TZ_TABS_FIELD_TABS_INTERACTION_DESC">
+					<option value="click">Click</option>
+					<option value="mouseenter">Mouse Over</option>
+				</field>
+
+				<field name="tabs_title_type" type="list" default="content" label="MOD_TZ_TABS_FIELD_TABS_TITLE_LABEL" description="MOD_TZ_TABS_FIELD_TABS_TITLE_DESC">
+					<option value="content">By Content Title</option>
+					<option value="custom">Custom</option>
+				</field>
+
+				<field name="tabs_title_custom" type="textarea" rows="4" cols="40" default="Tab Title1, Tab Title2, Tab Title3" label="MOD_TZ_TABS_FIELD_CUSTOM_TITLES_LABEL" description="MOD_TZ_TABS_FIELD_CUSTOM_TITLES_DESC"/>
+				
+				<field name="show_title_innerside" type="radio" class="btn-group" default="1" label="SHOW_TITLE_INNERSIDE_LABEL" description="SHOW_TITLE_INNERSIDE_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+				
+				<field type="spacer" name="intro_spacer" label="ARTICLE_ONLY" description=""/>
+				
+				<field name="intro_text_limit" type="radio" class="btn-group" default="1" label="INTRO_TEXT_LIMIT" description="INTRO_TEXT_LIMIT_DESC">
+					<option value="0">WORDS</option>
+					<option value="1">CHARS</option>
+				</field>
+
+				<field name="intro_limit" type="text" default="100" class="input-append input-small" label="DESCRIPTION_LIMIT_LABEL" description="DESCRIPTION_LIMIT_DESC" />
+				
+				<field name="show_readmore" type="list" default="1" label="MOD_TZ_TABS_FIELD_DEFAULT_READMORE_LABEL" description="MOD_TZ_TABS_FIELD_DEFAULT_READMORE_DESC">
+					<option value="1">Show</option>
+					<option value="0">Hide</option>
+				</field>
+
+				<field name="readmore_text" type="text" default="Read more.." label="MOD_TZ_TABS_FIELD_CUSTOM_READMORE_TEXT_LABEL" description="MOD_TZ_TABS_FIELD_CUSTOM_READMORE_TEXT_DESC" />
+				
+				<field name="readmore_class" type="text" default="btn" label="READMORE_CLASS_LABEL" description="READMORE_CLASS_DESC" />
+				
+				<field name="link_window" type="list" default="1" label="LINK_WINDOW_LABEL" description="LINK_WINDOW_DESC">
+                    <option value="1">SAME_WINDOW</option>
+                    <option value="2">NEW_WINDOW</option>
+                </field>
+				
+			
+			</fieldset>
+
+            <fieldset name="ANIMATION_STYLING_SETTINGS">
+                <field name="theme" type="list" default="style1" label="MOD_TZ_TABS_FIELD_STYLE_LABEL" description="MOD_TZ_TABS_FIELD_STYLE_DESC">
+                <option value="style1">Style 1</option>
+                <option value="style2">Style 2</option>
+                <option value="style3">Style 3</option>
+                <option value="style4">Style 4</option>
+                <option value="style5">Style 5</option>
+                <option value="custom">Custom</option>
+                </field>
+
+                <field name="transition_type" type="list" default="fade" label="MOD_TZ_TABS_FIELD_TRANSITION_TYPE_LABEL" description="MOD_TZ_TABS_FIELD_TRANSITION_TYPE_DESC">
+                    <option value="default">Plain</option>
+                    <option value="fade">Fading</option>
+                    <option value="slide">Scrolling</option>
+                </field>
+
+                <field name="fadein_speed" type="text" default="0" label="MOD_TZ_TABS_FIELD_FADEIN_SPEED_LABEL" description="MOD_TZ_TABS_FIELD_FADEIN_SPEED_DESC" />
+
+                <field name="fadeout_speed" type="text" default="400" label="MOD_TZ_TABS_FIELD_FADEOUT_SPEED_LABEL" description="MOD_TZ_TABS_FIELD_FADEOUT_SPEED_DESC" />
+
+                <field name="auto_play" type="radio" class="btn-group" default="0" label="MOD_TZ_TABS_FIELD_AUTOPLAY_LABEL" description="MOD_TZ_TABS_FIELD_AUTOPLAY_DESC">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </field>
+
+                <field name="auto_pause" type="radio" class="btn-group" default="1" label="MOD_TZ_TABS_FIELD_AUTOPAUSE_LABEL" description="MOD_TZ_TABS_FIELD_AUTOPAUSE_DESC">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </field>
+            </fieldset>
+
+            <fieldset name="advanced">
+                
+				<field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+				
+				<field name="moduleclass_sfx" type="text" default="" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+
+                <field name="load_jquery" type="list" default="1" label="MOD_TZ_TABS_FIELD_LOAD_JQUERY_LABEL" description="MOD_TZ_TABS_FIELD_LOAD_JQUERY_DESC">
+                    <option value="1">Enable</option>
+                    <option value="0">Disable</option>
+                </field>
+
+                <field name="jquery_source" type="list" default="local" label="MOD_TZ_TABS_FIELD_JQUERY_SOURCE_LABEL" description="MOD_TZ_TABS_FIELD_JQUERY_SOURCE_DESC">
+                    <option value="local">From Module Core</option>
+                    <option value="google_cdn">From Google CDN</option>
+                </field>
+
+                <field name="cache" type="list" default="0" label="Caching" description="Select whether to cache the content of this module">
+                    <option value="1">Use global</option>
+                    <option value="0">No caching</option>
+                </field>
+
+                <field name="cache_time" type="text" default="900" label="Cache Time" description="The time before the module is recached" />
+                
+				<field name="spaver2" type="spacer" label="Devider for j3" description="Devider desc" />
+                
+            </fieldset>
+			<fieldset name="documentation">
+				<field name="utility" type="utility" />
+				<field name="support" type="support" default="" title="MOD_INFO" message="MOD_INFO_DESC" info="true"/>
+				<field name="support" type="support" default="" title="SUPPORT_TITLE" message="SUPPORT_DESC"/>
+			</fieldset>
+        </fields>
+    </config>
+
+</extension>
